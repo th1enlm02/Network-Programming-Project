@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeTai05", "DeTai05\DeTai05.csproj", "{AC5A5AEE-9D06-4D12-BAAF-5F2EA608B850}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeTai14", "DeTai14\DeTai14.csproj", "{E0E92FB4-E7A2-42F9-9103-01DA79B6160E}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeTai14", "DeTai14\DeTai14.csproj", "{480D4FEA-448D-4874-9D88-C3C0AA002333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,11 @@ Global
 		{E0E92FB4-E7A2-42F9-9103-01DA79B6160E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0E92FB4-E7A2-42F9-9103-01DA79B6160E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0E92FB4-E7A2-42F9-9103-01DA79B6160E}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+		{480D4FEA-448D-4874-9D88-C3C0AA002333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480D4FEA-448D-4874-9D88-C3C0AA002333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480D4FEA-448D-4874-9D88-C3C0AA002333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480D4FEA-448D-4874-9D88-C3C0AA002333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
