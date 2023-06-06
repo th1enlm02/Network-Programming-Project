@@ -16,7 +16,7 @@ namespace DeTai05
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FTP());
+            Application.Run(new Services());
         }
     }
 }
