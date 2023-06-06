@@ -12,16 +12,19 @@ using System.Net.Sockets;
 
 namespace DeTai05
 {
-    public partial class FTP : Form
+    public partial class Services : Form
     {
-        public FTP()
+        public Services()
         {
             InitializeComponent();
+            textBoxIPAddress.Focus();
+            textBoxIPAddress.SelectAll();
         }
         private void buttonCheck_Click(object sender, EventArgs e)
         {
             string ipAddress = textBoxIPAddress.Text; // Địa chỉ IP của máy tính cần kiểm tra
-            int port = 21; // Cổng FTP mặc định
+            string[] service = comboBoxService.Text.Split(':');
+            int port = int.Parse(service[1]); // Cổng 
             try
             {
                 // Tạo socket và kết nối tới địa chỉ IP và cổng
@@ -32,7 +35,7 @@ namespace DeTai05
                     {
                         Message msg = new Message();
                         msg.labelCaption.Text = "Notification";
-                        msg.bunifuLabelText.Text = "FTP service is running.";
+                        msg.bunifuLabelText.Text = service[0] + " service is running.";
                         msg.ShowDialog();
                     }
                     else
