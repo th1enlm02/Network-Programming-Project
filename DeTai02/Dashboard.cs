@@ -16,10 +16,10 @@ namespace DeTai02
         {
             InitializeComponent();
         }
-
         private void buttonServer_Click(object sender, EventArgs e)
         {
             Server formServer = new Server();
+            buttonServer.Enabled = false;
             formServer.Show();
         }
 

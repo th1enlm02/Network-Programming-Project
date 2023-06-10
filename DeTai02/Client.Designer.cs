@@ -30,15 +30,17 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Client));
             this.bunifuGradientPanel1 = new Bunifu.UI.WinForms.BunifuGradientPanel();
+            this.bunifuPictureBoxSwitch = new Bunifu.UI.WinForms.BunifuPictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.bunifuPictureBox2 = new Bunifu.UI.WinForms.BunifuPictureBox();
+            this.bunifuPictureBoxSend = new Bunifu.UI.WinForms.BunifuPictureBox();
             this.textBoxReceive = new System.Windows.Forms.TextBox();
             this.comboBox_To = new System.Windows.Forms.ComboBox();
             this.textBoxSend = new System.Windows.Forms.TextBox();
             this.comboBox_From = new System.Windows.Forms.ComboBox();
             this.bunifuPictureBox1 = new Bunifu.UI.WinForms.BunifuPictureBox();
             this.bunifuGradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBoxSwitch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBoxSend)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,8 +50,9 @@
             this.bunifuGradientPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuGradientPanel1.BackgroundImage")));
             this.bunifuGradientPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bunifuGradientPanel1.BorderRadius = 1;
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuPictureBoxSwitch);
             this.bunifuGradientPanel1.Controls.Add(this.label1);
-            this.bunifuGradientPanel1.Controls.Add(this.bunifuPictureBox2);
+            this.bunifuGradientPanel1.Controls.Add(this.bunifuPictureBoxSend);
             this.bunifuGradientPanel1.Controls.Add(this.textBoxReceive);
             this.bunifuGradientPanel1.Controls.Add(this.comboBox_To);
             this.bunifuGradientPanel1.Controls.Add(this.textBoxSend);
@@ -66,32 +69,50 @@
             this.bunifuGradientPanel1.Size = new System.Drawing.Size(706, 455);
             this.bunifuGradientPanel1.TabIndex = 0;
             // 
+            // bunifuPictureBoxSwitch
+            // 
+            this.bunifuPictureBoxSwitch.AllowFocused = false;
+            this.bunifuPictureBoxSwitch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bunifuPictureBoxSwitch.AutoSizeHeight = true;
+            this.bunifuPictureBoxSwitch.BorderRadius = 35;
+            this.bunifuPictureBoxSwitch.Image = global::DeTai02.Properties.Resources._2223769;
+            this.bunifuPictureBoxSwitch.IsCircle = true;
+            this.bunifuPictureBoxSwitch.Location = new System.Drawing.Point(315, 172);
+            this.bunifuPictureBoxSwitch.Name = "bunifuPictureBoxSwitch";
+            this.bunifuPictureBoxSwitch.Size = new System.Drawing.Size(70, 70);
+            this.bunifuPictureBoxSwitch.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.bunifuPictureBoxSwitch.TabIndex = 5;
+            this.bunifuPictureBoxSwitch.TabStop = false;
+            this.bunifuPictureBoxSwitch.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Circle;
+            this.bunifuPictureBoxSwitch.Click += new System.EventHandler(this.bunifuPictureBoxSwitch_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(302, 200);
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(304, 292);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(98, 19);
             this.label1.TabIndex = 4;
             this.label1.Text = "Translate to";
             // 
-            // bunifuPictureBox2
+            // bunifuPictureBoxSend
             // 
-            this.bunifuPictureBox2.AllowFocused = false;
-            this.bunifuPictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.bunifuPictureBox2.AutoSizeHeight = true;
-            this.bunifuPictureBox2.BorderRadius = 0;
-            this.bunifuPictureBox2.Image = global::DeTai02.Properties.Resources.arrow;
-            this.bunifuPictureBox2.IsCircle = true;
-            this.bunifuPictureBox2.Location = new System.Drawing.Point(315, 270);
-            this.bunifuPictureBox2.Name = "bunifuPictureBox2";
-            this.bunifuPictureBox2.Size = new System.Drawing.Size(78, 78);
-            this.bunifuPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.bunifuPictureBox2.TabIndex = 3;
-            this.bunifuPictureBox2.TabStop = false;
-            this.bunifuPictureBox2.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Square;
+            this.bunifuPictureBoxSend.AllowFocused = false;
+            this.bunifuPictureBoxSend.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.bunifuPictureBoxSend.AutoSizeHeight = true;
+            this.bunifuPictureBoxSend.BorderRadius = 0;
+            this.bunifuPictureBoxSend.Image = global::DeTai02.Properties.Resources.arrow;
+            this.bunifuPictureBoxSend.IsCircle = true;
+            this.bunifuPictureBoxSend.Location = new System.Drawing.Point(315, 301);
+            this.bunifuPictureBoxSend.Name = "bunifuPictureBoxSend";
+            this.bunifuPictureBoxSend.Size = new System.Drawing.Size(78, 78);
+            this.bunifuPictureBoxSend.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.bunifuPictureBoxSend.TabIndex = 3;
+            this.bunifuPictureBoxSend.TabStop = false;
+            this.bunifuPictureBoxSend.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Square;
+            this.bunifuPictureBoxSend.Click += new System.EventHandler(this.bunifuPictureBoxSend_Click);
             // 
             // textBoxReceive
             // 
@@ -215,7 +236,8 @@
             this.Text = "Client";
             this.bunifuGradientPanel1.ResumeLayout(false);
             this.bunifuGradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBoxSwitch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBoxSend)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bunifuPictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -229,7 +251,8 @@
         private System.Windows.Forms.ComboBox comboBox_To;
         private System.Windows.Forms.TextBox textBoxSend;
         private System.Windows.Forms.ComboBox comboBox_From;
-        private Bunifu.UI.WinForms.BunifuPictureBox bunifuPictureBox2;
+        private Bunifu.UI.WinForms.BunifuPictureBox bunifuPictureBoxSend;
         private System.Windows.Forms.Label label1;
+        private Bunifu.UI.WinForms.BunifuPictureBox bunifuPictureBoxSwitch;
     }
 }

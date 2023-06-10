@@ -68,7 +68,7 @@
             this.bunifuGradientPanel1.Location = new System.Drawing.Point(0, 0);
             this.bunifuGradientPanel1.Name = "bunifuGradientPanel1";
             this.bunifuGradientPanel1.Quality = 10;
-            this.bunifuGradientPanel1.Size = new System.Drawing.Size(1053, 788);
+            this.bunifuGradientPanel1.Size = new System.Drawing.Size(1053, 899);
             this.bunifuGradientPanel1.TabIndex = 0;
             // 
             // bunifuPictureBoxDownload
@@ -92,9 +92,10 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(76, 206);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(901, 570);
+            this.pictureBox1.Size = new System.Drawing.Size(901, 681);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.leftmouseDownloadClick);
             // 
             // bunifuPictureBoxLeft
             // 
@@ -104,7 +105,7 @@
             this.bunifuPictureBoxLeft.BorderRadius = 0;
             this.bunifuPictureBoxLeft.Image = global::DeTai14.Properties.Resources.arrow_slide_1;
             this.bunifuPictureBoxLeft.IsCircle = true;
-            this.bunifuPictureBoxLeft.Location = new System.Drawing.Point(12, 447);
+            this.bunifuPictureBoxLeft.Location = new System.Drawing.Point(12, 502);
             this.bunifuPictureBoxLeft.Name = "bunifuPictureBoxLeft";
             this.bunifuPictureBoxLeft.Size = new System.Drawing.Size(58, 58);
             this.bunifuPictureBoxLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -121,7 +122,7 @@
             this.bunifuPictureBoxRight.BorderRadius = 0;
             this.bunifuPictureBoxRight.Image = global::DeTai14.Properties.Resources.arrow_slide;
             this.bunifuPictureBoxRight.IsCircle = true;
-            this.bunifuPictureBoxRight.Location = new System.Drawing.Point(983, 447);
+            this.bunifuPictureBoxRight.Location = new System.Drawing.Point(983, 502);
             this.bunifuPictureBoxRight.Name = "bunifuPictureBoxRight";
             this.bunifuPictureBoxRight.Size = new System.Drawing.Size(58, 58);
             this.bunifuPictureBoxRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -138,6 +139,7 @@
             this.textBoxLink.Name = "textBoxLink";
             this.textBoxLink.Size = new System.Drawing.Size(656, 25);
             this.textBoxLink.TabIndex = 0;
+            this.textBoxLink.Text = "https://tuoitre.vn";
             this.textBoxLink.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxLink_KeyDown);
             // 
             // label2
@@ -170,7 +172,7 @@
             this.bunifuPictureBox1.BorderRadius = 78;
             this.bunifuPictureBox1.Image = global::DeTai14.Properties.Resources.image_slider;
             this.bunifuPictureBox1.IsCircle = true;
-            this.bunifuPictureBox1.Location = new System.Drawing.Point(12, 27);
+            this.bunifuPictureBox1.Location = new System.Drawing.Point(12, 21);
             this.bunifuPictureBox1.Name = "bunifuPictureBox1";
             this.bunifuPictureBox1.Size = new System.Drawing.Size(156, 156);
             this.bunifuPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -182,7 +184,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1053, 788);
+            this.ClientSize = new System.Drawing.Size(1053, 899);
             this.Controls.Add(this.bunifuGradientPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

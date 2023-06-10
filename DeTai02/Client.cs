@@ -21,7 +21,6 @@ namespace DeTai02
         }
         private UdpClient udpClient;
         IPEndPoint serverEndpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 12345);
-        String ipAddress = "127.0.0.1";
         public void Receive()
         {
             while (true)
@@ -32,28 +31,42 @@ namespace DeTai02
                 textBoxReceive.Text = message;
             }
         }
+        public void send()
+        {
+            try
+            {
+                serverEndpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 12345);
+                udpClient = new UdpClient();
+                string[] from = comboBox_From.Text.Split(':');
+                string[] to = comboBox_To.Text.Split(':'); ;
+                string mess = from[1] + "," + to[1] + "," + textBoxSend.Text;
+                Byte[] sendBytes = Encoding.UTF8.GetBytes(mess);
+                udpClient.Send(sendBytes, sendBytes.Length, serverEndpoint);
+                Thread thread = new Thread(new ThreadStart(Receive));
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void textBoxSend_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                try
-                {
-                    serverEndpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 12345);
-                    udpClient = new UdpClient();
-                    string[] from = comboBox_From.Text.Split(':');
-                    string[] to = comboBox_To.Text.Split(':'); ;
-                    string mess = from[1] + "," + to[1] + "," + textBoxSend.Text;
-                    Byte[] sendBytes = Encoding.UTF8.GetBytes(mess);
-                    udpClient.Send(sendBytes, sendBytes.Length, serverEndpoint);
-                    Thread.Sleep(200);
-                    Thread thread = new Thread(new ThreadStart(Receive));
-                    thread.Start();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                send();
             }
+        }
+        private void bunifuPictureBoxSend_Click(object sender, EventArgs e)
+        {
+            send();
+        }
+        private void bunifuPictureBoxSwitch_Click(object sender, EventArgs e)
+        {
+            string temp = comboBox_From.Text;
+            comboBox_From.Text = comboBox_To.Text;
+            comboBox_To.Text = temp;
+            textBoxSend.Text = textBoxReceive.Text;
         }
     }
 }

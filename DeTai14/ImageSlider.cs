@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net;
-using System.Net.Sockets;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using static System.Windows.Forms.ImageList;
 using System.Net.Http;
 using HtmlAgilityPack;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace DeTai14
 {
@@ -28,13 +23,19 @@ namespace DeTai14
         List<Image> imageCollections = new List<Image>();
         private void bunifuPictureBoxDownload_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            foreach (var img in imageCollections)
+            DialogResult result = MessageBox.Show("Are you sure you want to download all images?", "Notification", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result == DialogResult.Yes)
             {
-                Bitmap bmp = new Bitmap(img);
-                if (sfd.ShowDialog() == DialogResult.OK)
-                    bmp.Save(sfd.FileName);
+                SaveFileDialog sfd = new SaveFileDialog();
+                foreach (var img in imageCollections)
+                {
+                    Bitmap bmp = new Bitmap(img);
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                        bmp.Save(sfd.FileName);
+                }
             }
+            else
+                return;
         }
         private void bunifuPictureBoxLeft_Click(object sender, EventArgs e)
         {
@@ -50,22 +51,79 @@ namespace DeTai14
                 index = 0;
             pictureBox1.Image = imageCollections[index];
         }
+
         private async void textBoxLink_KeyDown(object sender, KeyEventArgs e)
         {
+            index = 0;
+            imageCollections.Clear();
             try
             {
                 if (e.KeyValue == (char)Keys.Enter)
                 {
                     HtmlWeb web = new HtmlWeb();
                     var htmlDoc = web.Load(textBoxLink.Text);
-                    var imgArticles = htmlDoc.DocumentNode?.SelectNodes("//div[@class='box-category-item']//img/@src");
-                    foreach (var img in imgArticles)
+                    if (textBoxLink.Text == "https://tuoitre.vn" || textBoxLink.Text == "https://tuoitre.vn/")
                     {
-                        var imgUrl = img.GetAttributeValue("src", "");
-                        var selectedImgStream = await client.GetStreamAsync(imgUrl);
-                        Bitmap bmp = new Bitmap(selectedImgStream);
-                        Bitmap resizedBmp = ResizeImage(bmp, pictureBox1.Width, pictureBox1.Height);
-                        imageCollections.Add(resizedBmp);
+                        var imgArticles = htmlDoc.DocumentNode?.SelectNodes("//div[@class='box-category-item']//img/@src");
+                        foreach (var img in imgArticles)
+                        {
+                            var imgUrl = img.GetAttributeValue("src", "");
+                            if (imgUrl == null)
+                                continue;
+                            var selectedImgStream = await client.GetStreamAsync(imgUrl);
+                            Bitmap bmp = new Bitmap(selectedImgStream);
+                            Bitmap resizedBmp = ResizeImage(bmp, pictureBox1.Width, pictureBox1.Height);
+                            imageCollections.Add(resizedBmp);
+                        }
+                    }
+                    else if (textBoxLink.Text == "https://nhandan.vn" || textBoxLink.Text == "https://nhandan.vn/")
+                    {
+                        var imgArticles = htmlDoc.DocumentNode?.SelectNodes("//img[substring(@src, string-length(@src) - 3) = '.jpg']");
+                        foreach (var img in imgArticles)
+                        {
+                            var imgUrl = img.GetAttributeValue("src", "");
+                            if (imgUrl.Contains(','))
+                                imgUrl = imgUrl.Split(',')[0];
+                            var selectedImgStream = await client.GetStreamAsync(imgUrl);
+                            Bitmap bmp = new Bitmap(selectedImgStream);
+                            Bitmap resizedBmp = ResizeImage(bmp, pictureBox1.Width, pictureBox1.Height);
+                        }
+                    }
+                    else if (textBoxLink.Text == "https://vnexpress.net/the-gioi/tu-lieu" || textBoxLink.Text == "https://vnexpress.net/the-gioi/tu-lieu/")
+                    {
+                        var imgArticles = htmlDoc.DocumentNode?.SelectNodes("//*[@id=\"automation_TV0\"]/div[2]/article");
+                        foreach (var img in imgArticles)
+                        {
+                            string imgUrl = "";
+                            if (img.SelectSingleNode("./div/a/picture/source")?.Attributes["srcset"]?.Value == null)
+                                imgUrl = img.SelectSingleNode("./div/a/picture/source")?.Attributes["data-srcset"]?.Value;
+                            else
+                                imgUrl = img.SelectSingleNode("./div/a/picture/source")?.Attributes["srcset"]?.Value;
+                            if (imgUrl == null)
+                            {
+                                continue;
+                            }
+                            if (imgUrl.Contains("data"))
+                            {
+                                //Match Regex
+                                var base64Data = Regex.Match(imgUrl, @"data:image/(?<type>.+?),(?<data>.+)").Groups["data"].Value;
+                                var binData = Convert.FromBase64String(base64Data);
+                                MemoryStream ms1 = new MemoryStream(binData);
+                                Bitmap bmp1 = new Bitmap(ms1);
+                                Bitmap resizedBmp1 = ResizeImage(bmp1, pictureBox1.Width, pictureBox1.Height);
+                                imageCollections.Add(resizedBmp1);
+                            }
+                            if (imgUrl.Contains("https"))
+                            {
+                                string httpUri = imgUrl.Split(',')[0];
+                                httpUri = imgUrl.Remove(httpUri.Length - 2);
+                                var byteArray = await client.GetByteArrayAsync(httpUri);
+                                MemoryStream ms2 = new MemoryStream(byteArray);
+                                Bitmap bmp2 = new Bitmap(ms2);
+                                Bitmap resizedBmp2 = ResizeImage(bmp2, pictureBox1.Width, pictureBox1.Height);
+                                imageCollections.Add(resizedBmp2);
+                            }
+                        }
                     }
                     pictureBox1.Image = imageCollections[index];
                 }
@@ -94,6 +152,16 @@ namespace DeTai14
                 graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
             }
             return destImage;
+        }
+        private void leftmouseDownloadClick(object sender, MouseEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            Bitmap bmp = new Bitmap(pictureBox1.Image);
+            if (e.Button == MouseButtons.Left)
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                    bmp.Save(sfd.FileName);
+            }
         }
     }
 }
